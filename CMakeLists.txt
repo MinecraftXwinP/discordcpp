@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 2.8)
+set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 
 find_package(Boost COMPONENTS system REQUIRED)
+find_package(nlohmann_json REQUIRED)
 
 add_library(
     discordcpp
@@ -13,6 +16,4 @@ add_library(
 
 target_link_libraries(discordcpp ${Boost_LIBRARIES})
 
-target_include_directories(discordcpp PRIVATE include)
-
-target_include_directories(discordcpp INTERFACE ${Boost_INCLUDE_DIRS})
+target_include_directories(discordcpp PUBLIC include ${Boost_INCLUDE_DIRS} ${nlohmann_json_INCLUDE_DIRS})
