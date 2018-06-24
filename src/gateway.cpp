@@ -1,14 +1,10 @@
 #include "gateway.hpp"
-
-using tcp = boost::asio::ip::tcp;
-namespace http = boost::beast::http;
+#include "rest_api.hpp"
 
 namespace discordcpp {
-    std::string gateway::queryEndpoint(beast::asio::io_context io) {
-        tcp::resolver resolver{io};
-        tcp::socket socket{io};
-        auto const results = resolver.resolve(DISCORD_API_HOST, 443);
-        boost::asio::connect(socket, results.begin(), results.end());
-        http::request<http::string_body> request{http::verb::get, DISCORD_API_BASE}
+    std::string gateway::query_gateway_endpoint(boost::asio::io_context& io) {
+        rest_api rest(io);
+        nlohmann::json res = rest.get("/gateway");
+        return res["url"];
     }
 }
