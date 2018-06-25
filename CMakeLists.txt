@@ -4,7 +4,7 @@ set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 
 find_package(Boost COMPONENTS system REQUIRED)
 find_package(nlohmann_json REQUIRED)
-find_package(Openssl REQUIRED)
+find_package(OpenSSL REQUIRED)
 
 add_library(
     discordcpp
