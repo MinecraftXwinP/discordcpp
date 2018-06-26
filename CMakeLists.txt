@@ -5,6 +5,8 @@ set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 find_package(Boost COMPONENTS system REQUIRED)
 find_package(nlohmann_json REQUIRED)
 find_package(OpenSSL REQUIRED)
+find_package(Threads REQUIRED)
+
 
 add_library(
     discordcpp
@@ -14,7 +16,12 @@ add_library(
     src/rest_api.cpp
 )
 
-target_link_libraries(discordcpp ${Boost_SYSTEM_LIBRARIES} ${OPENSSL_LIBRARIES})
+target_link_libraries(
+	discordcpp
+	${Boost_SYSTEM_LIBRARIES}
+	${OPENSSL_LIBRARIES}
+	${CMAKE_THREAD_LIBS_INIT}
+)
 
 target_include_directories(
     discordcpp PUBLIC include
