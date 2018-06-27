@@ -14,6 +14,10 @@ add_library(
     src/gateway.cpp
     src/rest_api.hpp
     src/rest_api.cpp
+    src/payload.hpp
+    src/payload.cpp
+    src/dispatch_payload.hpp
+    src/dispatch_payload.cpp
 )
 
 target_link_libraries(
