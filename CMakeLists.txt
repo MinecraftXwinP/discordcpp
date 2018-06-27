@@ -34,3 +34,5 @@ target_include_directories(
 )
 
 add_subdirectory(example)
+
+add_subdirectory(test)
