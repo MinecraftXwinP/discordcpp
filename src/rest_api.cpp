@@ -1,6 +1,7 @@
 #include "rest_api.hpp"
 #include <cstdio>
 #include <iostream>
+#include "ssl_error.hpp"
 
 
 
@@ -32,15 +33,17 @@ namespace discordcpp {
         }
         boost::system::error_code ec;
         socket->shutdown(ec);
-        if(ec == boost::asio::error::eof)
+        nlohmann::json res_json = nlohmann::json::parse(boost::beast::buffers_to_string(res.body().data()));
+
+        if(ec == boost::asio::error::eof || ec.category() == boost::asio::error::ssl_category)
         {
             // Rationale:
             // http://stackoverflow.com/questions/25587403/boost-asio-ssl-async-shutdown-always-finishes-with-an-error
-            ec.assign(0, ec.category());
+            throw ssl_error<nlohmann::json>(ec, res_json);
         }
-        if(ec)
-            throw boost::system::system_error{ec};
-        return nlohmann::json::parse(boost::beast::buffers_to_string(res.body().data()));
+
+        
+        return res_json;
     }
 
     std::unique_ptr<ssl_socket> rest_api::connect() {

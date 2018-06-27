@@ -6,7 +6,10 @@
 namespace discordcpp {
     class gateway {
     public:
-        static std::string query_gateway_endpoint(boost::asio::io_context& io);
+        gateway(boost::asio::io_context& io);
+        std::string query_gateway_endpoint();
+    private:
+        boost::asio::io_context& io;
     };
 };
 
