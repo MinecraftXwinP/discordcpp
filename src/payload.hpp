@@ -9,10 +9,10 @@ namespace discordcpp {
             explicit payload() {};
             payload(int op,nlohmann::json data);
             operator std::string();
+            virtual nlohmann::json get_json() const;
         protected:
             int op;
             nlohmann::json data;
-            virtual nlohmann::json get_json() const;
     };
 };
 #endif
