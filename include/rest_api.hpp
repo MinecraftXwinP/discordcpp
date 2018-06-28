@@ -22,10 +22,10 @@ namespace discordcpp {
         public:
             rest_api(boost::asio::io_context& io);
             nlohmann::json get(std::string path);
+            static std::string get_target(std::string path);
         private:
             boost::asio::io_context& io;
             std::unique_ptr<ssl_socket> connect();
-            std::string get_target(std::string path);
     };
 };
 
