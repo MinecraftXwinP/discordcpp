@@ -23,11 +23,10 @@ add_library(
     src/client.cpp
     src/gateway.cpp
     src/rest_api.cpp
-    src/payload.hpp
     src/payload.cpp
-    src/dispatch_payload.hpp
     src/dispatch_payload.cpp
     src/asio_impl.cpp
+    src/persistent_state.cpp
 )
 
 target_compile_definitions(discordcpp PUBLIC "BOOST_ASIO_SEPARATE_COMPILATION" "BOOST_ERROR_CODE_HEADER_ONLY")
