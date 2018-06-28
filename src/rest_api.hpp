@@ -25,7 +25,7 @@ namespace discordcpp {
         private:
             boost::asio::io_context& io;
             std::unique_ptr<ssl_socket> connect();
-            std::string getTarget(std::string path);
+            std::string get_target(std::string path);
     };
 };
 

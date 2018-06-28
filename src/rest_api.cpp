@@ -13,7 +13,7 @@ namespace discordcpp {
     nlohmann::json rest_api::get(std::string path) {
         std::unique_ptr<ssl_socket> socket = connect();
         
-        std::string target = getTarget(path);
+        std::string target = get_target(path);
         
         http::request<http::string_body> req{http::verb::get, target, 11};
         req.set(http::field::host, DISCORD_API_HOST);
@@ -69,7 +69,7 @@ namespace discordcpp {
         return socket;
     }
     
-    std::string rest_api::getTarget(std::string path) {
+    std::string rest_api::get_target(std::string path) {
         return DISCORD_API_BASE + path;
     }
 
