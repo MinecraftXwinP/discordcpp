@@ -12,7 +12,7 @@ namespace discordcpp {
         protected:
             int op;
             nlohmann::json data;
-            virtual const nlohmann::json get_json() const;
+            virtual nlohmann::json get_json() const;
     };
 };
 #endif

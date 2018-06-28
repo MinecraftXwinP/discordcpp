@@ -12,4 +12,11 @@ namespace discordcpp {
         seq = parsed["s"];
         event_type = parsed["t"];
     }
+
+    nlohmann::json dispatch_payload::get_json() const {
+        nlohmann::json j = payload::get_json();
+        j["s"] = seq;
+        j["t"] = event_type;
+        return j;
+    }
 };

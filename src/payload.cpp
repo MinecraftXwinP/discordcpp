@@ -7,7 +7,7 @@ namespace discordcpp {
         return get_json().dump();
     }
 
-    const nlohmann::json payload::get_json() const {
+    nlohmann::json payload::get_json() const {
         return nlohmann::json{
             {"op",op},
             {"d", data},

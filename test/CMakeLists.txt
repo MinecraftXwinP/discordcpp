@@ -8,6 +8,8 @@ add_executable(
     unit_test
     unit_test.cpp
     unit-rest_api.cpp
+    unit-dispatch_payload.cpp
+    ${DISCORDCPP_PRIVATE_HEADERS}
 )
 
 target_link_libraries(
@@ -16,7 +18,6 @@ target_link_libraries(
     ${GTEST_LIBRARIES}
     ${CMAKE_THREAD_LIBS_INIT}
 )
-
-target_include_directories(unit_test PRIVATE ${GTEST_INCLUDE_DIRS})
+target_include_directories(unit_test PRIVATE ${GTEST_INCLUDE_DIRS} ${DISCORDCPP_SRC})
 
 gtest_discover_tests(unit_test)

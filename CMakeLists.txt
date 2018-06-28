@@ -8,11 +8,12 @@ find_package(OpenSSL REQUIRED)
 find_package(Threads REQUIRED)
 
 
+set(DISCORDCPP_SRC ${CMAKE_CURRENT_SOURCE_DIR}/src)
+
 add_library(
     discordcpp
     src/client.cpp
     src/gateway.cpp
-    src/rest_api.hpp
     src/rest_api.cpp
     src/payload.hpp
     src/payload.cpp
