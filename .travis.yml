@@ -1,0 +1,48 @@
+language: cpp
+
+matrix:
+  include:
+  - os: linux
+    compiler: gcc
+    addons:
+      apt:
+        sources: ['ubuntu-toolchain-r-test']
+        packages:
+        - g++-4.9
+        - libboost-all-dev
+        - cmake
+  - os: linux
+    compiler: clang
+    addons:
+      apt:
+        sources: ['ubuntu-toolchain-r-test']
+        packages:
+        - g++-4.9
+        - libboost-all-dev
+        - cmake
+  - os: osx
+    osx_image: xcode9
+
+  - os: osx
+    osx_image: xcode9.1
+
+  - os: osx
+    osx_image: xcode9.2
+
+  - os: osx
+    osx_image: xcode9.3
+  - os: osx
+    os_image: xcode10
+install:
+  - |
+    if [[ (-x $(which brew)) ]]; then
+       brew update
+       brew install cmake boost
+       brew upgrade cmake
+       cmake --version
+    fi
+script:
+  - mkdir build
+  - cd build && cmake ..
+  - make
+  - ./test/unit_test
