@@ -3,7 +3,7 @@ set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 
 find_package(Boost COMPONENTS system REQUIRED)
-find_package(nlohmann_json REQUIRED)
+find_package(nlohmann_json)
 find_package(OpenSSL REQUIRED)
 find_package(Threads REQUIRED)
 
@@ -31,8 +31,23 @@ target_link_libraries(
 target_include_directories(
     discordcpp PUBLIC include
     ${Boost_INCLUDE_DIRS}
-    ${nlohmann_json_INCLUDE_DIRS}
 )
+
+if(NOT ${nlohmann_json_INCLUDE_DIRS})
+    include(ExternalProject)
+    ExternalProject_Add(
+        nlohmann_json
+        PREFIX ${CMAKE_CURRENT_BINARY_DIR}/deps
+        GIT_REPOSITORY https://github.com/nlohmann/json.git
+        BUILD_COMMAND ""
+        TEST_COMMAND ""
+        INSTALL_COMMAND ""
+    )
+    target_include_directories(discordcpp PUBLIC ${CMAKE_CURRENT_BINARY_DIR}/deps/src/nlohmann_json/single_include)
+else()
+    target_include_directories(discordcpp PUBLIC ${nlohmann_json_INCLUDE_DIRS})
+endif()
+
 
 add_subdirectory(example)
 
