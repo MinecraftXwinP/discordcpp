@@ -17,6 +17,11 @@ namespace discordcpp {
     }
 
     void persistent_state::load() {
+
+        if (!file_utils::file_exists(path)) {
+            return;
+        }
+
         std::ifstream f(path, std::ios::binary);
 
         if (f.good()) {

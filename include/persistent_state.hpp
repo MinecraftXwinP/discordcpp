@@ -4,6 +4,8 @@
 #include <nlohmann/json.hpp>
 #include <string>
 
+#include "file_utils.hpp"
+
 namespace discordcpp {
     class persistent_state {
         public:

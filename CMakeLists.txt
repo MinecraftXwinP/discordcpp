@@ -27,6 +27,7 @@ add_library(
     src/dispatch_payload.cpp
     src/asio_impl.cpp
     src/persistent_state.cpp
+    src/file_utils.cpp
 )
 
 target_compile_definitions(discordcpp PUBLIC "BOOST_ASIO_SEPARATE_COMPILATION" "BOOST_ERROR_CODE_HEADER_ONLY")

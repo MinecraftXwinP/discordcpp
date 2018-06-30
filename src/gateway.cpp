@@ -3,12 +3,26 @@
 #include "ssl_error.hpp"
 
 namespace discordcpp {
-	gateway::gateway(io_context&  io): io(io), state(".gatway.cbor") {
+	gateway::gateway(io_context&  io): io(io), state(".gateway.cbor") {
         state.load();
     }
 
     gateway::~gateway() {
         state.save();
+    }
+
+    std::string gateway::get_gateway_endpoint() {
+        std::string endpoint;
+        try {
+            endpoint = state["url"].get<std::string>();
+            if (endpoint.length() > 0) {
+                return endpoint;
+            }
+        } catch (const nlohmann::json::type_error& e) {}
+
+        endpoint = query_gateway_endpoint();
+        state["url"] = endpoint;
+        return endpoint;
     }
 
     std::string gateway::query_gateway_endpoint() const {

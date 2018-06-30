@@ -9,6 +9,7 @@ add_executable(
     unit-rest_api.cpp
     unit-dispatch_payload.cpp
     unit-payload.cpp
+    unit-gateway.cpp
     ${DISCORDCPP_PRIVATE_HEADERS}
 )
 
