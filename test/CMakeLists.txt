@@ -1,18 +1,29 @@
 cmake_minimum_required(VERSION 3.10)
-
-
 find_package(GTest)
 
 if ((NOT GTEST_FOUND) OR BUILD_GTEST)
     include(ExternalProject)
     ExternalProject_Add(
         gtest
-        PREFIX ${CMAKE_CURRENT_BINARY_DIR}/deps
         GIT_REPOSITORY https://github.com/google/googletest.git
+        INSTALL_COMMAND ""
     )
+    ExternalProject_Get_Property(gtest source_dir)
+    set(GTEST_INCLUDE_DIRS ${source_dir}/googletest/include)
+    ExternalProject_Get_Property(gtest binary_dir)
+    set(GTEST_LIBRARY_PATH ${binary_dir}/googlemock/gtest/${CMAKE_FIND_LIBRARY_PREFIXES}gtest.a)
+
+    set(GTEST_LIBRARIES googletest)
+    add_library(${GTEST_LIBRARIES} UNKNOWN IMPORTED)
+    set_property(
+        TARGET
+        ${GTEST_LIBRARIES}
+        PROPERTY IMPORTED_LOCATION
+        ${GTEST_LIBRARY_PATH}
+    )
+    add_dependencies(${GTEST_LIBRARIES} gtest)
 endif()
 
-find_package(GTest REQUIRED)
 find_package(Threads REQUIRED)
 
 add_executable(
