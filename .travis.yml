@@ -23,12 +23,8 @@ install:
     cmake . -DCMAKE_INSTALL_PREFIX=/tmp/cmake
     make install
     popd && popd
-    # build gtest
-    pushd /usr/src/gtest
-    make
-    cp *.a /usr/lib
-    popd
 script:
+  - /tmp/cmake/bin/cmake --version
   - mkdir build
   - cd build && /tmp/cmake/bin/cmake ..
   - make

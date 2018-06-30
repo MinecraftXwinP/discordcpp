@@ -3,7 +3,7 @@ include(FindPackageHandleStandardArgs)
 find_path(
     nlohmann_json_INCLUDE_DIRS
     HINTS
-				${NLOHMANN_JSON_DIR}
+        ${NLOHMANN_JSON_DIR}
         ENV NLOHMANN_JSON_DIR
     NAMES
     nlohmann/json.hpp

@@ -1,6 +1,17 @@
 cmake_minimum_required(VERSION 3.10)
 
-include(GoogleTest)
+
+find_package(GTest)
+
+if ((NOT GTEST_FOUND) OR BUILD_GTEST)
+    include(ExternalProject)
+    ExternalProject_Add(
+        gtest
+        PREFIX ${CMAKE_CURRENT_BINARY_DIR}/deps
+        GIT_REPOSITORY https://github.com/google/googletest.git
+    )
+endif()
+
 find_package(GTest REQUIRED)
 find_package(Threads REQUIRED)
 
@@ -20,5 +31,7 @@ target_link_libraries(
     ${CMAKE_THREAD_LIBS_INIT}
 )
 target_include_directories(unit_test PRIVATE ${GTEST_INCLUDE_DIRS} ${DISCORDCPP_SRC})
+
+include(GoogleTest)
 
 gtest_discover_tests(unit_test)

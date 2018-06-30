@@ -32,8 +32,9 @@ target_include_directories(
     discordcpp PUBLIC include
     ${Boost_INCLUDE_DIRS}
 )
-
-if(NOT ${nlohmann_json_INCLUDE_DIRS})
+if(nlohmann_json_FOUND)
+    target_include_directories(discordcpp PUBLIC ${nlohmann_json_INCLUDE_DIRS})
+else()
     include(ExternalProject)
     ExternalProject_Add(
         nlohmann_json
@@ -44,8 +45,6 @@ if(NOT ${nlohmann_json_INCLUDE_DIRS})
         INSTALL_COMMAND ""
     )
     target_include_directories(discordcpp PUBLIC ${CMAKE_CURRENT_BINARY_DIR}/deps/src/nlohmann_json/single_include)
-else()
-    target_include_directories(discordcpp PUBLIC ${nlohmann_json_INCLUDE_DIRS})
 endif()
 
 
