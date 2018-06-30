@@ -11,47 +11,27 @@ matrix:
         - g++-4.9
         - libboost-all-dev
         - cmake
-  - os: linux
-    compiler: clang
-    addons:
-      apt:
-        sources: ['ubuntu-toolchain-r-test']
-        packages:
-        - g++-4.9
-        - libboost-all-dev
-        - cmake
-  - os: osx
-    osx_image: xcode9
-
-  - os: osx
-    osx_image: xcode9.1
-
-  - os: osx
-    osx_image: xcode9.2
-
-  - os: osx
-    osx_image: xcode9.3
-  - os: osx
-    os_image: xcode10
+        - libssl-dev
+        - libgtest-dev
 install:
   - |
     if [[ (-x $(which brew)) ]]; then
       brew update
-      brew install cmake boost
+      brew install cmake boost openssl
       brew upgrade cmake
       cmake --version
     else
       # install cmake 
-      pushd /tmp/cmake
+      pushd /tmp
       wget https://cmake.org/files/v3.12/cmake-3.12.0-rc2.tar.gz
       tar -xf cmake-3.12.0-rc2.tar.gz
       pushd cmake-3.12.0-rc2
-      ./bootstrap
-      make
-      popd -2
+      cmake . -DCMAKE_INSTALL_PREFIX=/tmp/cmake
+      make install
+      popd && popd
     fi
 script:
   - mkdir build
-  - cd build && cmake ..
+  - cd build && /tmp/cmake/bin/cmake ..
   - make
   - ./test/unit_test
