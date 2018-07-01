@@ -12,7 +12,6 @@ matrix:
         - libboost-all-dev
         - cmake
         - libssl-dev
-        - libgtest-dev
 install:
   - |
     # install cmake 

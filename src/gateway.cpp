@@ -3,7 +3,7 @@
 #include "ssl_error.hpp"
 
 namespace discordcpp {
-	gateway::gateway(boost::asio::io_context& io): io(io) {}
+	gateway::gateway(io_context& io): io(io) {}
 
     std::string gateway::query_gateway_endpoint() {
         rest_api rest(io);

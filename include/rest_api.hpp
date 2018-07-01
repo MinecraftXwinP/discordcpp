@@ -9,6 +9,8 @@
 #include <nlohmann/json.hpp>
 #include <memory>
 
+#include "asio_port.hpp"
+
 #define DISCORD_API_BASE "https://discordapp.com/api"
 #define DISCORD_API_HOST "discordapp.com"
 
@@ -20,11 +22,11 @@ namespace discordcpp {
     typedef ssl::stream<tcp::socket> ssl_socket;
     class rest_api {
         public:
-            rest_api(boost::asio::io_context& io);
+            rest_api(io_context& io);
             nlohmann::json get(std::string path);
             static std::string get_target(std::string path);
         private:
-            boost::asio::io_context& io;
+            io_context& io;
             std::unique_ptr<ssl_socket> connect();
     };
 };

@@ -8,7 +8,7 @@
 namespace discordcpp {
 
     
-    rest_api::rest_api(boost::asio::io_context& io): io(io) {}
+    rest_api::rest_api(io_context& io): io(io) {}
 
     nlohmann::json rest_api::get(std::string path) {
         std::unique_ptr<ssl_socket> socket = connect();
