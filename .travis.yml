@@ -4,17 +4,19 @@ matrix:
   include:
   - os: linux
     compiler: gcc
+    env:
+    - MATRIX_EVAL="CXX=g++-4.9"
     addons:
       apt:
         sources: ['ubuntu-toolchain-r-test']
         packages:
         - g++-4.9
-        - libboost-all-dev
         - cmake
         - libssl-dev
+before_install:
+    - eval "${MATRIX_EVAL}"
 install:
   - |
-    # install cmake 
     pushd /tmp
     wget https://cmake.org/files/v3.12/cmake-3.12.0-rc2.tar.gz
     tar -xf cmake-3.12.0-rc2.tar.gz
@@ -22,9 +24,15 @@ install:
     cmake . -DCMAKE_INSTALL_PREFIX=/tmp/cmake
     make install
     popd && popd
+    pushd /tmp
+    git clone --recursive https://github.com/boostorg/boost.git
+    pushd boost
+    ./bootstrap.sh --with-libraries=system
+    ./b2 threading=multi variant=release
+    popd && popd
 script:
   - /tmp/cmake/bin/cmake --version
   - mkdir build
-  - cd build && /tmp/cmake/bin/cmake ..
+  - cd build && /tmp/cmake/bin/cmake .. -DBOOST_ROOT=/tmp/boost
   - make
   - ./test/unit_test
