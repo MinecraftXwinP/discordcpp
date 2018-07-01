@@ -19,7 +19,11 @@ add_library(
     src/payload.cpp
     src/dispatch_payload.hpp
     src/dispatch_payload.cpp
+    src/asio_impl.cpp
 )
+
+target_compile_definitions(discordcpp PUBLIC "BOOST_ASIO_SEPARATE_COMPILATION")
+
 
 target_link_libraries(
 	discordcpp
