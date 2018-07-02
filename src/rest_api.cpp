@@ -11,11 +11,9 @@ namespace discordcpp {
     rest_api::rest_api(io_context& io): io(io) {}
 
     nlohmann::json rest_api::get(std::string path) {
-        std::unique_ptr<ssl_socket> socket = connect();
+        std::unique_ptr<ssl_socket> socket = ssl_socket_factory::build(io,DISCORD_API_HOST);
         
-        std::string target = get_target(path);
-        
-        http::request<http::string_body> req{http::verb::get, target, 11};
+        http::request<http::string_body> req{http::verb::get, get_target(path), 11};
         req.set(http::field::host, DISCORD_API_HOST);
         req.set(http::field::user_agent, BOOST_BEAST_VERSION_STRING);
         req.set(http::field::accept, "application/json");
@@ -46,28 +44,28 @@ namespace discordcpp {
         return res_json;
     }
 
-    std::unique_ptr<ssl_socket> rest_api::connect() {
-        ssl::context ctx(ssl::context::sslv23);
-        ctx.set_default_verify_paths();
+    // std::unique_ptr<ssl_socket> rest_api::connect() {
+    //     ssl::context ctx(ssl::context::sslv23);
+    //     ctx.set_default_verify_paths();
         
         
-        std::unique_ptr<ssl_socket> socket = std::make_unique<ssl_socket>(io, ctx);
-        socket->set_verify_mode(boost::asio::ssl::verify_none);
-        tcp::resolver resolver{io};
-        tcp::resolver::query query(DISCORD_API_HOST, "https");
-        auto const results = resolver.resolve(query);
-        ssl::stream<tcp::socket>::lowest_layer_type& lowest_layer = socket->lowest_layer();
-        // Set SNI Hostname (many hosts need this to handshake successfully)
-        if(! SSL_set_tlsext_host_name(socket->native_handle(), DISCORD_API_HOST))
-        {
-            boost::system::error_code ec{static_cast<int>(::ERR_get_error()), boost::asio::error::get_ssl_category()};
-            throw boost::system::system_error{ec};
-        }
+    //     std::unique_ptr<ssl_socket> socket = std::make_unique<ssl_socket>(io, ctx);
+    //     socket->set_verify_mode(boost::asio::ssl::verify_none);
+    //     tcp::resolver resolver{io};
+    //     tcp::resolver::query query(DISCORD_API_HOST, "https");
+    //     auto const results = resolver.resolve(query);
+    //     ssl::stream<tcp::socket>::lowest_layer_type& lowest_layer = socket->lowest_layer();
+    //     // Set SNI Hostname (many hosts need this to handshake successfully)
+    //     if(! SSL_set_tlsext_host_name(socket->native_handle(), DISCORD_API_HOST))
+    //     {
+    //         boost::system::error_code ec{static_cast<int>(::ERR_get_error()), boost::asio::error::get_ssl_category()};
+    //         throw boost::system::system_error{ec};
+    //     }
 
-        boost::asio::connect(lowest_layer, results.begin(), results.end());
-        socket->handshake(ssl_socket::client);
-        return socket;
-    }
+    //     boost::asio::connect(lowest_layer, results.begin(), results.end());
+    //     socket->handshake(ssl_socket::client);
+    //     return socket;
+    // }
     
     std::string rest_api::get_target(std::string path) {
         return DISCORD_API_BASE + path;

@@ -28,6 +28,7 @@ add_library(
     src/asio_impl.cpp
     src/persistent_state.cpp
     src/file_utils.cpp
+    src/ssl_socket_factory.cpp
 )
 
 target_compile_definitions(discordcpp PUBLIC "BOOST_ASIO_SEPARATE_COMPILATION" "BOOST_ERROR_CODE_HEADER_ONLY")
