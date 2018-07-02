@@ -1,10 +1,18 @@
-#include <boost/asio.hpp>
+#ifndef _H_ASIO_PORT_
+    #define _H_ASIO_PORT_
 
-
-namespace discordcpp {
     #if BOOST_VERSION / 100 % 1000 >= 66
-        typedef boost::asio::io_context io_context;
+        #include <boost/asio/io_context.hpp>
     #else
-        typedef boost::asio::io_service io_service;
+        #include <boost/asio/io_service.hpp>
     #endif
-};
+
+
+    namespace discordcpp {
+        #if BOOST_VERSION / 100 % 1000 >= 66
+            typedef boost::asio::io_context io_context;
+        #else
+            typedef boost::asio::io_service io_service;
+        #endif
+    };
+#endif
