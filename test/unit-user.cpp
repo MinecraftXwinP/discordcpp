@@ -2,7 +2,7 @@
 #include "user.hpp"
 
 TEST(User, Deserialize) {
-    const nlohmann::json input = R"J(
+    const nlohmann::json input = nlohmann::json::parse(R"J(
         {
             "id": "80351110224678912",
             "username": "Nelly",
@@ -11,7 +11,7 @@ TEST(User, Deserialize) {
             "verified": true,
             "email": "nelly@discordapp.com"
         }
-    )J";
+    )J");
     discordcpp::user u(input);
 
     ASSERT_EQ(80351110224678912, u.id);

@@ -4,7 +4,7 @@
 #include <string>
 #include <nlohmann/json.hpp>
 
-typedef int snowflake;
+typedef uint64_t snowflake;
 
 namespace discordcpp {
     class user {
