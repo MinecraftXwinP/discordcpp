@@ -5,7 +5,7 @@ matrix:
   - os: linux
     compiler: gcc
     env:
-    - MATRIX_EVAL="CXX=g++-4.9"
+    - MATRIX_EVAL="CXX=g++-4.9 CC=gcc-4.9"
     addons:
       apt:
         sources: ['ubuntu-toolchain-r-test']
