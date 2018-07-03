@@ -13,6 +13,7 @@ namespace discordcpp {
             void save() const;
             void load();
             nlohmann::json::reference operator[](const std::string& key);
+            nlohmann::json::reference at(const std::string& key);
         private:
             std::string path;
             nlohmann::json value;

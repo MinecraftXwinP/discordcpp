@@ -5,10 +5,17 @@
 
 #include "gateway.hpp"
 #include "file_utils.hpp"
+#include <cstdio>
 
 namespace {
 
-    TEST(Gateway, GetGatewayEndpointSaveUrl) {
+    class GatewayFixture:public ::testing::Test {
+        virtual void TearDown() {
+            remove(".gateway.cbor");
+        }
+    };
+
+    TEST_F(GatewayFixture, GetGatewayEndpointSaveUrl) {
         boost::asio::io_context io;
         {
             discordcpp::gateway g(io);

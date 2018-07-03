@@ -38,4 +38,8 @@ namespace discordcpp {
     nlohmann::json::reference persistent_state::operator[](const std::string& key) {
         return value[key];
     }
+
+    nlohmann::json::reference persistent_state::at(const std::string& key) {
+        return value.at(key);
+    }
 };

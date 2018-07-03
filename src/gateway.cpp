@@ -14,7 +14,7 @@ namespace discordcpp {
     std::string gateway::get_gateway_endpoint() {
         std::string endpoint;
         try {
-            endpoint = state["url"].get<std::string>();
+            endpoint = state.at("url").get<std::string>();
             if (endpoint.length() > 0) {
                 return endpoint;
             }
