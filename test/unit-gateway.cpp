@@ -15,11 +15,10 @@ namespace {
         }
     };
 
-    TEST_F(GatewayFixture, GetGatewayEndpointSaveUrl) {
+    TEST_F(GatewayFixture, SaveStateWhenDestructed) {
         boost::asio::io_context io;
         {
             discordcpp::gateway g(io);
-            g.get_gateway_endpoint(); 
         }
         ASSERT_TRUE(discordcpp::file_utils::file_exists(".gateway.cbor"));
     }

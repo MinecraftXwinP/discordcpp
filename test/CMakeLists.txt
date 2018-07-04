@@ -11,6 +11,7 @@ add_executable(
     unit-payload.cpp
     unit-gateway.cpp
     unit-user.cpp
+    unit_persistent-state.cpp
     ${DISCORDCPP_PRIVATE_HEADERS}
 )
 
