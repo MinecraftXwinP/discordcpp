@@ -10,9 +10,8 @@
 
 #include "asio_port.hpp"
 #include "ssl_socket_factory.hpp"
+#include "discord_api.hpp"
 
-#define DISCORD_API_BASE "https://discordapp.com/api"
-#define DISCORD_API_HOST "discordapp.com"
 
 namespace http = boost::beast::http;
 namespace discordcpp {
