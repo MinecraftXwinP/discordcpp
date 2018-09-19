@@ -24,15 +24,9 @@ install:
     cmake . -DCMAKE_INSTALL_PREFIX=/tmp/cmake
     make install
     popd && popd
-    pushd /tmp
-    git clone --recursive https://github.com/boostorg/boost.git
-    pushd boost
-    ./bootstrap.sh --with-libraries=system
-    ./b2 threading=multi variant=release
-    popd && popd
 script:
   - /tmp/cmake/bin/cmake --version
   - mkdir build
-  - cd build && /tmp/cmake/bin/cmake .. -DBOOST_ROOT=/tmp/boost
+  - cd build && /tmp/cmake/bin/cmake ..
   - make
   - ./test/unit_test
