@@ -6,7 +6,6 @@ matrix:
     compiler: gcc
     env:
     - MATRIX_EVAL="CXX=g++-4.9"
-    - B2_TOOLSET="gcc-4.9"
     addons:
       apt:
         sources: ['ubuntu-toolchain-r-test']
@@ -18,7 +17,6 @@ matrix:
     compiler: gcc
     env:
     - MATRIX_EVAL="CXX=g++-5"
-    - B2_TOOLSET="gcc-5"
     addons:
       apt:
         sources: ['ubuntu-toolchain-r-test']
@@ -26,7 +24,6 @@ matrix:
         - g++-5
         - cmake
         - libssl-dev
-
 before_install:
     - eval "${MATRIX_EVAL}"
 install:
