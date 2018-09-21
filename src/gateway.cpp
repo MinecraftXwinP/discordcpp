@@ -1,6 +1,6 @@
-#include "gateway.hpp"
-#include "rest_api.hpp"
-#include "ssl_error.hpp"
+#include "discordcpp/gateway.hpp"
+#include "discordcpp/rest_api.hpp"
+#include "discordcpp/ssl_error.hpp"
 
 namespace discordcpp {
 	gateway::gateway(io_context&  io): io(io), state(".gateway.cbor") {

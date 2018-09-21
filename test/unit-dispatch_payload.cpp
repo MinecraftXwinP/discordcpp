@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "dispatch_payload.hpp"
+#include "discordcpp/dispatch_payload.hpp"
 
 namespace {
     TEST(DispatchPayload, GetJSON) {

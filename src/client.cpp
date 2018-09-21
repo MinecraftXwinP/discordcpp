@@ -1,4 +1,4 @@
-#include "discordcpp.hpp"
+#include "discordcpp/discordcpp.hpp"
 #include <iostream>
 
 namespace discordcpp {

@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "payload.hpp"
+#include "discordcpp/payload.hpp"
 namespace {
     TEST(Payload, GetJson) {
         const nlohmann::json data{

@@ -3,8 +3,8 @@
 #include <string>
 #include <fstream>
 
-#include "gateway.hpp"
-#include "file_utils.hpp"
+#include "discordcpp/gateway.hpp"
+#include "discordcpp/file_utils.hpp"
 #include <cstdio>
 
 namespace {

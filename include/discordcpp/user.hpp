@@ -1,6 +1,7 @@
 #ifndef _H_USER_
 #define _H_USER_
 
+#include <sstream>
 #include <string>
 #include <nlohmann/json.hpp>
 

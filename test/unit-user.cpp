@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "user.hpp"
+#include "discordcpp/user.hpp"
 
 TEST(User, Deserialize) {
     const nlohmann::json input = nlohmann::json::parse(R"J(

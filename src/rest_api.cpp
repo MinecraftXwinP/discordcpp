@@ -1,7 +1,7 @@
-#include "rest_api.hpp"
+#include "discordcpp/rest_api.hpp"
 #include <cstdio>
 #include <iostream>
-#include "ssl_error.hpp"
+#include "discordcpp/ssl_error.hpp"
 
 
 

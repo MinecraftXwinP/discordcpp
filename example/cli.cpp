@@ -1,6 +1,6 @@
-#include "gateway.hpp"
+#include "discordcpp/gateway.hpp"
 #include <iostream>
-#include "asio_port.hpp"
+#include "discordcpp/asio_port.hpp"
 
 int main(int argc, char** args) {
 	discordcpp::io_context io;

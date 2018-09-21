@@ -1,4 +1,4 @@
-#include "payload.hpp"
+#include "discordcpp/payload.hpp"
 
 namespace discordcpp {
     payload::payload(int op, nlohmann::json data): op(op), data(data) {}

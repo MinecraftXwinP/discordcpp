@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 
-#include "persistent_state.hpp"
+#include "discordcpp/persistent_state.hpp"
 #include <cstdio>
 
 #define TEST_STATE_FILE "persistent_state_test.cbor"

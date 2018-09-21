@@ -1,4 +1,4 @@
-#include "ssl_socket_factory.hpp"
+#include "discordcpp/ssl_socket_factory.hpp"
 
 namespace discordcpp {
     std::unique_ptr<ssl_socket> ssl_socket_factory::build(io_context& io,const std::string& host, const std::string& service) {

@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "rest_api.hpp"
+#include "discordcpp/rest_api.hpp"
 
 namespace {
     TEST(RestAPI, GetTargetReturnURL) {

@@ -1,4 +1,4 @@
-#include "dispatch_payload.hpp"
+#include "discordcpp/dispatch_payload.hpp"
 
 namespace discordcpp {
     dispatch_payload::dispatch_payload(nlohmann::json data, int sequence_number, std::string event_type):
