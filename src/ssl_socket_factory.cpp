@@ -1,4 +1,7 @@
-#include "discordcpp/ssl_socket_factory.hpp"
+#include <boost/asio/ssl.hpp>
+#include <boost/asio/connect.hpp>
+#include <discordcpp/ssl_socket_factory.hpp>
+#include <discordcpp/asio_port.hpp>
 
 namespace discordcpp {
     std::unique_ptr<ssl_socket> ssl_socket_factory::build(io_context& io,const std::string& host, const std::string& service) {
@@ -6,7 +9,7 @@ namespace discordcpp {
         ctx.set_default_verify_paths();
         
         std::unique_ptr<ssl_socket> socket = std::make_unique<ssl_socket>(io, ctx);
-        socket->set_verify_mode(boost::asio::ssl::verify_none);
+        socket->set_verify_mode(boost::asio::ssl::verify_peer);
         tcp::resolver resolver{io};
         tcp::resolver::query query(host, service);
         auto const results = resolver.resolve(query);

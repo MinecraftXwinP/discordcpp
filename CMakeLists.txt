@@ -30,6 +30,7 @@ add_library(
     src/file_utils.cpp
     src/ssl_socket_factory.cpp
     src/user.cpp
+    src/ssl_session.cpp
 )
 
 target_compile_definitions(discordcpp PUBLIC "BOOST_ASIO_SEPARATE_COMPILATION" "BOOST_ERROR_CODE_HEADER_ONLY")
